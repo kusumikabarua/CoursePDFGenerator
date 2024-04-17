@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { TextField, Button, MenuItem, FormControl, InputLabel, Select } from '@mui/material';
-import Box from '@mui/material/Box';
+import React, { useState } from "react";
+import {
+  TextField,
+  Button,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
+} from "@mui/material";
+import Box from "@mui/material/Box";
+import ReactPDF from '@react-pdf/renderer';
+import PDFGenerator from "./components/PDFGenerator";
 
 function App() {
   const [formData, setFormData] = useState({
-    textFieldValue: '',
-    selectValue: '',
+    name: "",
+    course: "",
   });
+  const [pdfData, setPDFData] =useState();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -18,14 +28,14 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     console.log(formData);
   };
 
+ 
   return (
-    <div style={{ padding: '20px',margin:"50px" }}>
+    <div style={{ padding: "20px", margin: "50px" }}>
       <form onSubmit={handleSubmit}>
-      <InputLabel>Name:</InputLabel>
         <TextField
           label="Name"
           variant="outlined"
@@ -52,20 +62,23 @@ function App() {
             <MenuItem value="MTech">MTech</MenuItem>
           </Select>
         </FormControl>
-        <Box  sx={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          gap: 1,
-          borderRadius: 1,
-        }}>
-        <Button variant="contained" type="submit" color="primary">
-          Submit
-        </Button>
-        <Button variant="contained" type="button" color="primary">
-          Generate PDF
-        </Button>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            gap: 2,
+          }}
+        >
+          <Button variant="contained" type="submit" color="primary">
+            Submit
+          </Button>
+          <Button variant="contained" type="button" color="success">
+          <PDFGenerator />
+          </Button>
+         
         </Box>
       </form>
+      {pdfData}
     </div>
   );
 }
