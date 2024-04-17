@@ -8,7 +8,7 @@ import {
   Select,
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import ReactPDF from '@react-pdf/renderer';
+
 import PDFGenerator from "./components/PDFGenerator";
 
 function App() {
@@ -16,8 +16,8 @@ function App() {
     name: "",
     course: "",
   });
-  const [pdfData, setPDFData] =useState();
-
+  
+ 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -39,7 +39,7 @@ function App() {
         <TextField
           label="Name"
           variant="outlined"
-          name="Name"
+          name="name"
           value={formData.name}
           onChange={handleChange}
           fullWidth
@@ -51,7 +51,7 @@ function App() {
             labelId="course-label"
             id="course"
             value={formData.course}
-            name="Course"
+            name="course"
             onChange={handleChange}
             label="Course"
           >
@@ -73,12 +73,12 @@ function App() {
             Submit
           </Button>
           <Button variant="contained" type="button" color="success">
-          <PDFGenerator />
+          <PDFGenerator name ={formData.name} course={formData.course} filename ={formData.name+"_"+formData.course+".pdf"}/>
           </Button>
          
         </Box>
       </form>
-      {pdfData}
+     
     </div>
   );
 }
